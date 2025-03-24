@@ -1,114 +1,114 @@
 package edu.iastate.cs2280.hw2;
 
 import java.io.FileNotFoundException;
-import java.lang.NumberFormatException; 
-import java.lang.IllegalArgumentException; 
+import java.lang.NumberFormatException;
+import java.lang.IllegalArgumentException;
 import java.util.InputMismatchException;
 
 /**
- *  
+ *
  * @author Ayr Nasser Neto
  *
  */
 
 /**
- * 
- * This class implements the mergesort algorithm.   
+ *
+ * This class implements the mergesort algorithm.
  *
  */
 
 public class MergeSorter extends AbstractSorter
 {
-	// Other private instance variables if needed
-	
-	/** 
-	 * Constructor takes an array of points.  It invokes the superclass constructor, and also 
-	 * set the instance variables algorithm in the superclass.
-	 *  
-	 * @param pts   input array of integers
-	 */
-	public MergeSorter(Point[] pts) 
-	{
-		super(pts);
-		super.algorithm = "mergesort";
-	}
+    // Other private instance variables if needed
+
+    /**
+     * Constructor takes an array of points.  It invokes the superclass constructor, and also
+     * set the instance variables algorithm in the superclass.
+     *
+     * @param pts   input array of integers
+     */
+    public MergeSorter(Point[] pts)
+    {
+        super(pts);
+        super.algorithm = "mergesort";
+    }
 
 
-	/**
-	 * Perform mergesort on the array points[] of the parent class AbstractSorter. 
-	 * 
-	 */
-	@Override 
-	public void sort()
-	{
-		mergeSortRec(points);
-	}
+    /**
+     * Perform mergesort on the array points[] of the parent class AbstractSorter.
+     *
+     */
+    @Override
+    public void sort()
+    {
+        mergeSortRec(points);
+    }
 
-	
-	/**
-	 * This is a recursive method that carries out mergesort on an array pts[] of points. One 
-	 * way is to make copies of the two halves of pts[], recursively call mergeSort on them, 
-	 * and merge the two sorted sub-arrays into pts[].
-	 * 
-	 * @param pts	point array 
-	 */
-	private void mergeSortRec(Point[] pts)
-	{
-		if(pts.length <= 1){
-			return;
-		}
 
-		int length = pts.length;
-		int middle = length / 2;
-		int k = 0;
+    /**
+     * This is a recursive method that carries out mergesort on an array pts[] of points. One
+     * way is to make copies of the two halves of pts[], recursively call mergeSort on them,
+     * and merge the two sorted sub-arrays into pts[].
+     *
+     * @param pts	point array
+     */
+    private void mergeSortRec(Point[] pts)
+    {
+        if(pts.length <= 1){
+            return;
+        }
 
-		Point[] left = new Point[middle + (length % 2)];
-		Point[] right = new Point[middle];
+        int length = pts.length;
+        int middle = length / 2;
+        int k = 0;
 
-		for(int i = 0; i < middle; i++){
-			left[i] = pts[i];
-		}
+        Point[] left = new Point[middle + (length % 2)];
+        Point[] right = new Point[middle];
 
-		for(int i = middle; i < pts.length; i++){
-			right[k] = pts[i];
-			k++;
-		}
+        for(int i = 0; i < middle; i++){
+            left[i] = pts[i];
+        }
 
-		mergeSortRec(left); // This works because the array is an object, and objects
-		mergeSortRec(right); // always are passed as reference and keep their values
+        for(int i = middle; i < pts.length; i++){
+            right[k] = pts[i];
+            k++;
+        }
 
-		// Merge starts here
+        mergeSortRec(left); // This works because the array is an object, and objects
+        mergeSortRec(right); // always are passed as reference and keep their values
 
-		int i = 0;
-		int j = 0;
-		k = 0;
+        // Merge starts here
 
-		while(i < left.length && j < right.length){
-			if(pointComparator.compare(left[i], right[j]) <= 0){
-				points[k] = left[i];
-				i++;
-			}
-			else{
-				points[k] = right[j];
-				j++;
-			}
-			k++;
-		}
+        int i = 0;
+        int j = 0;
+        k = 0;
 
-		while(j < right.length){
-			points[k] = right[j];
-			j++;
-			k++;
-		}
+        while(i < left.length && j < right.length){
+            if(pointComparator.compare(left[i], right[j]) <= 0){
+                points[k] = left[i];
+                i++;
+            }
+            else{
+                points[k] = right[j];
+                j++;
+            }
+            k++;
+        }
 
-		while(i < left.length){
-			points[k] = left[i];
-			i++;
-			k++;
-		}
-	}
+        while(j < right.length){
+            points[k] = right[j];
+            j++;
+            k++;
+        }
 
-	
-	// Other private methods if needed ...
+        while(i < left.length){
+            points[k] = left[i];
+            i++;
+            k++;
+        }
+    }
+
+
+    // Other private methods if needed ...
 
 }
