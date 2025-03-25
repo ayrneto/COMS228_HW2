@@ -118,11 +118,6 @@ public class PointScanner
      */
     public void scan()
     {
-        // TODO
-        // TODO: I GET IT: We get the median value of the x, then get the median of the y
-        // TODO: AND THEN, create a whole new Point from these 2 coords to input into
-        // TODO: medianCoordinateInput. It doesnt need to be a Point that we have. can be a whole
-        // TODO: new point coords
         AbstractSorter aSorter;
         int medianXSorted;
         int medianYSorted;
@@ -186,6 +181,28 @@ public class PointScanner
 
         else if(sortingAlgorithm == Algorithm.MergeSort){
             aSorter = new MergeSorter(points);
+
+            // START counting up the time
+            long startTime = System.nanoTime();
+
+            aSorter.setComparator(0); // Set to compare by x-coordinate
+            aSorter.sort(); // Sorts points[] on the x-coordinate
+            medianXSorted = points[points.length / 2].getX(); // Get the median x-coordinate int
+
+            aSorter.setComparator(1); // Set to compare by y-coordinate
+            aSorter.sort(); // Sorts points[] on the y-coordinate
+            medianYSorted = points[points.length / 2].getY(); // Get the median x-coordinate int
+
+            // STOP counting the time
+            long endTime = System.nanoTime();
+            scanTime = endTime - startTime;
+
+            // Create the median coordinate Point and assign it
+            medianCoordinatePoint = new Point(medianXSorted, medianYSorted);
+        }
+
+        else if(sortingAlgorithm == Algorithm.QuickSort){
+            aSorter = new QuickSorter(points);
 
             // START counting up the time
             long startTime = System.nanoTime();
