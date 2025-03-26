@@ -96,7 +96,6 @@ public class Point implements Comparable<Point>
     @Override
     public String toString()
     {
-        // TODO
-        return null;
+        return "(" + getX() + ", " + getY() + ")";
     }
 }

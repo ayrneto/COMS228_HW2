@@ -12,7 +12,7 @@ import java.util.InputMismatchException;
 import java.io.File;
 import java.util.Scanner;
 import java.util.List;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 
 
 /**
@@ -113,7 +113,7 @@ public class PointScanner
      *
      * Based on the value of sortingAlgorithm, create an object of SelectionSorter, InsertionSorter, MergeSorter,
      * or QuickSorter to carry out sorting.
-     * @param algo
+     * @param
      * @return
      */
     public void scan()
@@ -239,8 +239,7 @@ public class PointScanner
      */
     public String stats()
     {
-        return null;
-        // TODO
+        return sortingAlgorithm.name() + " " + points.length + " " + scanTime;
     }
 
 
@@ -251,8 +250,7 @@ public class PointScanner
     @Override
     public String toString()
     {
-        return null;
-        // TODO
+        return "MCP: " + medianCoordinatePoint.toString();
     }
 
 
@@ -266,7 +264,12 @@ public class PointScanner
      */
     public void writeMCPToFile() throws FileNotFoundException
     {
-        // TODO
+        String outputFileName = "outputFile.txt";
+        File file = new File(outputFileName);
+
+        try(PrintWriter printWriter = new PrintWriter(file)){
+            printWriter.print(toString());
+        }
     }
 
 
