@@ -6,18 +6,14 @@ package edu.iastate.cs2280.hw2;
  *
  */
 
-/**
- *
- * This class executes four sorting algorithms: selection sort, insertion sort, mergesort, and
- * quicksort, over randomly generated integers as well integers from a file input. It compares the
- * execution times of these algorithms on the same input.
- *
- */
-
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Random;
-
+/**
+ * This class executes four sorting algorithms: selection sort, insertion sort, mergesort, and
+ * quicksort, over randomly generated integers as well integers from a file input. It compares the
+ * execution times of these algorithms on the same input.
+ */
 
 public class CompareSorters
 {
