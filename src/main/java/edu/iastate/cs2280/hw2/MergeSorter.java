@@ -62,8 +62,8 @@ public class MergeSorter extends AbstractSorter
         int middle = length / 2;
         int k = 0;
 
-        Point[] left = new Point[middle + (length % 2)];
-        Point[] right = new Point[middle];
+        Point[] left = new Point[middle];
+        Point[] right = new Point[length - middle];
 
         for(int i = 0; i < middle; i++){
             left[i] = pts[i];
@@ -85,24 +85,24 @@ public class MergeSorter extends AbstractSorter
 
         while(i < left.length && j < right.length){
             if(pointComparator.compare(left[i], right[j]) <= 0){
-                points[k] = left[i];
+                pts[k] = left[i];
                 i++;
             }
             else{
-                points[k] = right[j];
+                pts[k] = right[j];
                 j++;
             }
             k++;
         }
 
         while(j < right.length){
-            points[k] = right[j];
+            pts[k] = right[j];
             j++;
             k++;
         }
 
         while(i < left.length){
-            points[k] = left[i];
+            pts[k] = left[i];
             i++;
             k++;
         }

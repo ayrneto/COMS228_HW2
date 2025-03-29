@@ -143,11 +143,11 @@ public class PointScanner
 
             aSorter.setComparator(0); // Set to compare by x-coordinate
             aSorter.sort(); // Sorts points[] on the x-coordinate
-            medianXSorted = points[points.length / 2].getX(); // Get the median x-coordinate int
+            medianXSorted = aSorter.getMedian().getX(); // Get the median x-coordinate int
 
             aSorter.setComparator(1); // Set to compare by y-coordinate
             aSorter.sort(); // Sorts points[] on the y-coordinate
-            medianYSorted = points[points.length / 2].getY(); // Get the median x-coordinate int
+            medianYSorted = aSorter.getMedian().getY(); // Get the median y-coordinate int
 
             // STOP counting the time
             long endTime = System.nanoTime();
@@ -165,11 +165,11 @@ public class PointScanner
 
             aSorter.setComparator(0); // Set to compare by x-coordinate
             aSorter.sort(); // Sorts points[] on the x-coordinate
-            medianXSorted = points[points.length / 2].getX(); // Get the median x-coordinate int
+            medianXSorted = aSorter.getMedian().getX(); // Get the median x-coordinate int
 
             aSorter.setComparator(1); // Set to compare by y-coordinate
             aSorter.sort(); // Sorts points[] on the y-coordinate
-            medianYSorted = points[points.length / 2].getY(); // Get the median x-coordinate int
+            medianYSorted = aSorter.getMedian().getY(); // Get the median y-coordinate int
 
             // STOP counting the time
             long endTime = System.nanoTime();
@@ -187,11 +187,11 @@ public class PointScanner
 
             aSorter.setComparator(0); // Set to compare by x-coordinate
             aSorter.sort(); // Sorts points[] on the x-coordinate
-            medianXSorted = points[points.length / 2].getX(); // Get the median x-coordinate int
+            medianXSorted = aSorter.getMedian().getX(); // Get the median x-coordinate int
 
             aSorter.setComparator(1); // Set to compare by y-coordinate
             aSorter.sort(); // Sorts points[] on the y-coordinate
-            medianYSorted = points[points.length / 2].getY(); // Get the median x-coordinate int
+            medianYSorted = aSorter.getMedian().getY(); // Get the median y-coordinate int
 
             // STOP counting the time
             long endTime = System.nanoTime();
@@ -209,11 +209,11 @@ public class PointScanner
 
             aSorter.setComparator(0); // Set to compare by x-coordinate
             aSorter.sort(); // Sorts points[] on the x-coordinate
-            medianXSorted = points[points.length / 2].getX(); // Get the median x-coordinate int
+            medianXSorted = aSorter.getMedian().getX(); // Get the median x-coordinate int
 
             aSorter.setComparator(1); // Set to compare by y-coordinate
             aSorter.sort(); // Sorts points[] on the y-coordinate
-            medianYSorted = points[points.length / 2].getY(); // Get the median x-coordinate int
+            medianYSorted = aSorter.getMedian().getY(); // Get the median y-coordinate int
 
             // STOP counting the time
             long endTime = System.nanoTime();
@@ -239,7 +239,21 @@ public class PointScanner
      */
     public String stats()
     {
-        return sortingAlgorithm.name() + " " + points.length + " " + scanTime;
+        if(sortingAlgorithm == Algorithm.SelectionSort){
+            return sortingAlgorithm.name() + "  " + points.length + "    " + scanTime;
+        }
+
+        else if(sortingAlgorithm == Algorithm.InsertionSort){
+            return sortingAlgorithm.name() + "  " + points.length + "    " + scanTime;
+        }
+
+        else if(sortingAlgorithm == Algorithm.MergeSort){
+            return sortingAlgorithm.name() + "      " + points.length + "    " + scanTime;
+        }
+
+        else{
+            return sortingAlgorithm.name() + "      " + points.length + "    " + scanTime;
+        }
     }
 
 
