@@ -6,147 +6,110 @@ package edu.iastate.cs2280.hw2;
  *
  */
 
-import java.util.Comparator;
-import java.io.FileNotFoundException;
-import java.lang.IllegalArgumentException;
-import java.util.InputMismatchException;
-
 /**
  *
- * This abstract class is extended by SelectionSort, InsertionSort, MergeSort, and QuickSort.
- * It stores the input (later the sorted) sequence.
+ * This class executes four sorting algorithms: selection sort, insertion sort, mergesort, and
+ * quicksort, over randomly generated integers as well integers from a file input. It compares the
+ * execution times of these algorithms on the same input.
  *
  */
-public abstract class AbstractSorter
+
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.Random;
+
+
+public class CompareSorters
 {
-
-    protected Point[] points;    // array of points operated on by a sorting algorithm.
-    // stores ordered points after a call to sort().
-
-    protected String algorithm = null; // "selection sort", "insertion sort", "mergesort", or
-    // "quicksort". Initialized by a subclass constructor.
-
-    protected Comparator<Point> pointComparator = null;
-
-
-    // Add other protected or private instance variables you may need.
-
-
-    protected AbstractSorter()
+    /**
+     * Repeatedly take integer sequences either randomly generated or read from files.
+     * Use them as coordinates to construct points.  Scan these points with respect to their
+     * median coordinate point four times, each time using a different sorting algorithm.
+     *
+     * @param args
+     **/
+    public static void main(String[] args) throws FileNotFoundException
     {
-        // No implementation needed. Provides a default super constructor to subclasses.
-        // Removable after implementing SelectionSorter, InsertionSorter, MergeSorter, and QuickSorter.
+        // TODO
+        //
+        // Conducts multiple rounds of comparison of four sorting algorithms.  Within each round,
+        // set up scanning as follows:
+        //
+        //    a) If asked to scan random points, calls generateRandomPoints() to initialize an array
+        //       of random points.
+        //
+        //    b) Reassigns to the array scanners[] (declared below) the references to four new
+        //       PointScanner objects, which are created using four different values
+        //       of the Algorithm type:  SelectionSort, InsertionSort, MergeSort and QuickSort.
+        //
+        //
+        PointScanner[] scanners = new PointScanner[4];
+        Scanner scanner = new Scanner(System.in);
+
+        int keyInput = 0;
+        int trialNumber = 1;
+        int numPointsInput = 0;
+
+        System.out.println("Performances of Four Algorithms in Point Scanning");
+
+        while(keyInput != 3){
+            System.out.println("Keys: 1 (random integers), 2 (file input), 3 (exit)");
+
+            System.out.print("Trial " + trialNumber + ": ");
+            keyInput = scanner.nextInt();
+            System.out.println();
+
+            System.out.println("Enter number of random points: ");
+            numPointsInput = scanner.nextInt();
+            System.out.println();
+
+            // Random Integers
+            if(keyInput == 1){
+
+            }
+
+            // File Input
+            else if(keyInput == 2){
+
+            }
+
+            // Exit
+            else if(keyInput == 3){
+
+            }
+        }
+
+
+        // For each input of points, do the following.
+        //
+        //     a) Initialize the array scanners[].
+        //
+        //     b) Iterate through the array scanners[], and have every scanner call the scan()
+        //        method in the PointScanner class.
+        //
+        //     c) After all four scans are done for the input, print out the statistics table from
+        //		  section 2.
+        //
+        // A sample scenario is given in Section 2 of the project description.
+
     }
 
 
     /**
-     * This constructor accepts an array of points as input. Copy the points into the array points[].
+     * This method generates a given number of random points.
+     * The coordinates of these points are pseudo-random numbers within the range
+     * [-50,50] � [-50,50]. Please refer to Section 3 on how such points can be generated.
      *
-     * @param  pts  input array of points
-     * @throws IllegalArgumentException if pts == null or pts.length == 0.
+     * Ought to be private. Made public for testing.
+     *
+     * @param numPts  	number of points
+     * @param rand      Random object to allow seeding of the random number generator
+     * @throws IllegalArgumentException if numPts < 1
      */
-    protected AbstractSorter(Point[] pts) throws IllegalArgumentException
+    public static Point[] generateRandomPoints(int numPts, Random rand) throws IllegalArgumentException
     {
-        if(pts == null || pts.length == 0){
-            throw new IllegalArgumentException("Parameter is null or empty");
-        }
-
-        points = new Point[pts.length];
-
-        for(int i = 0; i < pts.length; i++){
-            points[i] = pts[i];
-        }
+        return null;
+        // TODO
     }
 
-
-
-    /**
-     * Generates a comparator on the fly that compares by x-coordinate if order == 0, by y-coordinate
-     * if order == 1. Assign the
-     * comparator to the variable pointComparator.
-     *
-     *
-     * @param order  0   by x-coordinate
-     * 				 1   by y-coordinate
-     *
-     *
-     * @throws IllegalArgumentException if order is less than 0 or greater than 1
-     *
-     */
-    public void setComparator(int order) throws IllegalArgumentException
-    {
-        if(order < 0 || order > 1){
-            throw new IllegalArgumentException("Parameter order isn't 0 or 1");
-        }
-
-        // Compare x-coordinate
-        if(order == 0){
-            Point.setXorY(true); // setXorY() is static
-
-            pointComparator = new Comparator<Point>() {
-                @Override
-                public int compare(Point o1, Point o2) {
-                    return o1.compareTo(o2);
-                }
-            };
-        }
-
-        // Compare y-coordinate
-        if(order == 1){
-            Point.setXorY(false);
-
-            pointComparator = new Comparator<Point>() {
-                @Override
-                public int compare(Point o1, Point o2) {
-                    return o1.compareTo(o2);
-                }
-            };
-        }
-    }
-
-
-    /**
-     * Use the created pointComparator to conduct sorting.
-     *
-     * Should be protected. Made public for testing.
-     */
-    protected abstract void sort();
-
-
-    /**
-     * Obtain the point in the array points[] that has median index
-     *
-     * @return	median point
-     */
-    public Point getMedian()
-    {
-        return points[points.length/2];
-    }
-
-
-    /**
-     * Copys the array points[] onto the array pts[].
-     *
-     * @param pts
-     */
-    public void getPoints(Point[] pts)
-    {
-        for(int i = 0; i < points.length; i++){
-            pts[i] = points[i];
-        }
-    }
-
-
-    /**
-     * Swaps the two elements indexed at i and j respectively in the array points[].
-     *
-     * @param i
-     * @param j
-     */
-    protected void swap(int i, int j)
-    {
-        Point temp = points[i];
-        points[i] = points[j];
-        points[j] = temp;
-    }
 }
