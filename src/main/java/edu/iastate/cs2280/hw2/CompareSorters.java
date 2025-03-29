@@ -6,14 +6,18 @@ package edu.iastate.cs2280.hw2;
  *
  */
 
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.Random;
 /**
+ *
  * This class executes four sorting algorithms: selection sort, insertion sort, mergesort, and
  * quicksort, over randomly generated integers as well integers from a file input. It compares the
  * execution times of these algorithms on the same input.
+ *
  */
+
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.Random;
+
 
 public class CompareSorters
 {
@@ -40,6 +44,41 @@ public class CompareSorters
         //
         //
         PointScanner[] scanners = new PointScanner[4];
+        Scanner scanner = new Scanner(System.in);
+
+        int keyInput = 0;
+        int trialNumber = 1;
+        int numPointsInput = 0;
+
+        System.out.println("Performances of Four Algorithms in Point Scanning");
+
+        while(keyInput != 3){
+            System.out.println("Keys: 1 (random integers), 2 (file input), 3 (exit)");
+
+            System.out.print("Trial " + trialNumber + ": ");
+            keyInput = scanner.nextInt();
+            System.out.println();
+
+            System.out.println("Enter number of random points: ");
+            numPointsInput = scanner.nextInt();
+            System.out.println();
+
+            // Random Integers
+            if(keyInput == 1){
+
+            }
+
+            // File Input
+            else if(keyInput == 2){
+
+            }
+
+            // Exit
+            else if(keyInput == 3){
+
+            }
+        }
+
 
         // For each input of points, do the following.
         //
